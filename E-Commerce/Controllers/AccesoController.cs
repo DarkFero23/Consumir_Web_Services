@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using E_Commerce.Models;
+using Newtonsoft.Json;
 namespace E_Commerce.Controllers
 {
     public class AccesoController : Controller
@@ -19,6 +21,7 @@ namespace E_Commerce.Controllers
         {
             return View();
         }
+       
 
         // Método para procesar el registro de usuario
         [HttpPost]
@@ -34,7 +37,7 @@ namespace E_Commerce.Controllers
                     ServiceReference1.WebService1SoapClient conexion = new ServiceReference1.WebService1SoapClient();
 
                     // Llamar al método del servicio web para registrar al usuario
-                    string resultado = conexion.crearUsuarios(oUsuario.nombre_completo, oUsuario.correo, oUsuario.contraseña);
+                    string resultado = conexion.crearUsuarios(oUsuario.nombre_completo, oUsuario.correo, oUsuario.contraseña, oUsuario.dni);
 
                     // Verificar el resultado del registro
                     if (resultado == "Usuario creado exitosamente")
@@ -76,7 +79,7 @@ namespace E_Commerce.Controllers
                 // Llamar al método del servicio web para validar al usuario
                 string resultado = conexion.validarUsuario(oUsuario.correo, oUsuario.contraseña);
 
-                if (resultado == "El usuario es válido.")
+                if (resultado == "El usuario es válido")
                 {
                     // Usuario válido, guardar en la sesión y redirigir al inicio
                     Session["usuario"] = oUsuario;
@@ -96,5 +99,8 @@ namespace E_Commerce.Controllers
                 return View();
             }
         }
+        
+
+
     }
 }

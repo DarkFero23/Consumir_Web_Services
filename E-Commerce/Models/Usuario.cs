@@ -10,8 +10,9 @@ namespace E_Commerce.Models
             public string nombre_completo { get; set; }
             public string contraseña { get; set; }
             public string correo { get; set; }
-
+            public string dni { get; set; }
             public string ConfirmarClave { get; set; }
+            
 
             //public string CerraSesion { get; set; }
     }

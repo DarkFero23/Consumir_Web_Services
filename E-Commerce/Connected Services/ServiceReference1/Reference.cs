@@ -29,14 +29,14 @@ namespace E_Commerce.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/listarUsuarios", ReplyAction="*")]
         System.Threading.Tasks.Task<E_Commerce.ServiceReference1.listarUsuariosResponse> listarUsuariosAsync(E_Commerce.ServiceReference1.listarUsuariosRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento us_correo del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento us_dni del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/actualizarUsuario", ReplyAction="*")]
         E_Commerce.ServiceReference1.actualizarUsuarioResponse actualizarUsuario(E_Commerce.ServiceReference1.actualizarUsuarioRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/actualizarUsuario", ReplyAction="*")]
         System.Threading.Tasks.Task<E_Commerce.ServiceReference1.actualizarUsuarioResponse> actualizarUsuarioAsync(E_Commerce.ServiceReference1.actualizarUsuarioRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento us_correo del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento us_dni del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/eliminarUsuario", ReplyAction="*")]
         E_Commerce.ServiceReference1.eliminarUsuarioResponse eliminarUsuario(E_Commerce.ServiceReference1.eliminarUsuarioRequest request);
         
@@ -83,13 +83,17 @@ namespace E_Commerce.ServiceReference1 {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string us_correo;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string us_dni;
+        
         public crearUsuariosRequestBody() {
         }
         
-        public crearUsuariosRequestBody(string us_nom, string us_contra, string us_correo) {
+        public crearUsuariosRequestBody(string us_nom, string us_contra, string us_correo, string us_dni) {
             this.us_nom = us_nom;
             this.us_contra = us_contra;
             this.us_correo = us_correo;
+            this.us_dni = us_dni;
         }
     }
     
@@ -212,18 +216,22 @@ namespace E_Commerce.ServiceReference1 {
     public partial class actualizarUsuarioRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string us_correo;
+        public string us_dni;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string us_nom;
+        public string us_correo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string us_nom;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string us_contrasena;
         
         public actualizarUsuarioRequestBody() {
         }
         
-        public actualizarUsuarioRequestBody(string us_correo, string us_nom, string us_contrasena) {
+        public actualizarUsuarioRequestBody(string us_dni, string us_correo, string us_nom, string us_contrasena) {
+            this.us_dni = us_dni;
             this.us_correo = us_correo;
             this.us_nom = us_nom;
             this.us_contrasena = us_contrasena;
@@ -288,13 +296,13 @@ namespace E_Commerce.ServiceReference1 {
     public partial class eliminarUsuarioRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string us_correo;
+        public string us_dni;
         
         public eliminarUsuarioRequestBody() {
         }
         
-        public eliminarUsuarioRequestBody(string us_correo) {
-            this.us_correo = us_correo;
+        public eliminarUsuarioRequestBody(string us_dni) {
+            this.us_dni = us_dni;
         }
     }
     
@@ -436,12 +444,13 @@ namespace E_Commerce.ServiceReference1 {
             return base.Channel.crearUsuarios(request);
         }
         
-        public string crearUsuarios(string us_nom, string us_contra, string us_correo) {
+        public string crearUsuarios(string us_nom, string us_contra, string us_correo, string us_dni) {
             E_Commerce.ServiceReference1.crearUsuariosRequest inValue = new E_Commerce.ServiceReference1.crearUsuariosRequest();
             inValue.Body = new E_Commerce.ServiceReference1.crearUsuariosRequestBody();
             inValue.Body.us_nom = us_nom;
             inValue.Body.us_contra = us_contra;
             inValue.Body.us_correo = us_correo;
+            inValue.Body.us_dni = us_dni;
             E_Commerce.ServiceReference1.crearUsuariosResponse retVal = ((E_Commerce.ServiceReference1.WebService1Soap)(this)).crearUsuarios(inValue);
             return retVal.Body.crearUsuariosResult;
         }
@@ -451,12 +460,13 @@ namespace E_Commerce.ServiceReference1 {
             return base.Channel.crearUsuariosAsync(request);
         }
         
-        public System.Threading.Tasks.Task<E_Commerce.ServiceReference1.crearUsuariosResponse> crearUsuariosAsync(string us_nom, string us_contra, string us_correo) {
+        public System.Threading.Tasks.Task<E_Commerce.ServiceReference1.crearUsuariosResponse> crearUsuariosAsync(string us_nom, string us_contra, string us_correo, string us_dni) {
             E_Commerce.ServiceReference1.crearUsuariosRequest inValue = new E_Commerce.ServiceReference1.crearUsuariosRequest();
             inValue.Body = new E_Commerce.ServiceReference1.crearUsuariosRequestBody();
             inValue.Body.us_nom = us_nom;
             inValue.Body.us_contra = us_contra;
             inValue.Body.us_correo = us_correo;
+            inValue.Body.us_dni = us_dni;
             return ((E_Commerce.ServiceReference1.WebService1Soap)(this)).crearUsuariosAsync(inValue);
         }
         
@@ -488,9 +498,10 @@ namespace E_Commerce.ServiceReference1 {
             return base.Channel.actualizarUsuario(request);
         }
         
-        public string actualizarUsuario(string us_correo, string us_nom, string us_contrasena) {
+        public string actualizarUsuario(string us_dni, string us_correo, string us_nom, string us_contrasena) {
             E_Commerce.ServiceReference1.actualizarUsuarioRequest inValue = new E_Commerce.ServiceReference1.actualizarUsuarioRequest();
             inValue.Body = new E_Commerce.ServiceReference1.actualizarUsuarioRequestBody();
+            inValue.Body.us_dni = us_dni;
             inValue.Body.us_correo = us_correo;
             inValue.Body.us_nom = us_nom;
             inValue.Body.us_contrasena = us_contrasena;
@@ -503,9 +514,10 @@ namespace E_Commerce.ServiceReference1 {
             return base.Channel.actualizarUsuarioAsync(request);
         }
         
-        public System.Threading.Tasks.Task<E_Commerce.ServiceReference1.actualizarUsuarioResponse> actualizarUsuarioAsync(string us_correo, string us_nom, string us_contrasena) {
+        public System.Threading.Tasks.Task<E_Commerce.ServiceReference1.actualizarUsuarioResponse> actualizarUsuarioAsync(string us_dni, string us_correo, string us_nom, string us_contrasena) {
             E_Commerce.ServiceReference1.actualizarUsuarioRequest inValue = new E_Commerce.ServiceReference1.actualizarUsuarioRequest();
             inValue.Body = new E_Commerce.ServiceReference1.actualizarUsuarioRequestBody();
+            inValue.Body.us_dni = us_dni;
             inValue.Body.us_correo = us_correo;
             inValue.Body.us_nom = us_nom;
             inValue.Body.us_contrasena = us_contrasena;
@@ -517,10 +529,10 @@ namespace E_Commerce.ServiceReference1 {
             return base.Channel.eliminarUsuario(request);
         }
         
-        public string eliminarUsuario(string us_correo) {
+        public string eliminarUsuario(string us_dni) {
             E_Commerce.ServiceReference1.eliminarUsuarioRequest inValue = new E_Commerce.ServiceReference1.eliminarUsuarioRequest();
             inValue.Body = new E_Commerce.ServiceReference1.eliminarUsuarioRequestBody();
-            inValue.Body.us_correo = us_correo;
+            inValue.Body.us_dni = us_dni;
             E_Commerce.ServiceReference1.eliminarUsuarioResponse retVal = ((E_Commerce.ServiceReference1.WebService1Soap)(this)).eliminarUsuario(inValue);
             return retVal.Body.eliminarUsuarioResult;
         }
@@ -530,10 +542,10 @@ namespace E_Commerce.ServiceReference1 {
             return base.Channel.eliminarUsuarioAsync(request);
         }
         
-        public System.Threading.Tasks.Task<E_Commerce.ServiceReference1.eliminarUsuarioResponse> eliminarUsuarioAsync(string us_correo) {
+        public System.Threading.Tasks.Task<E_Commerce.ServiceReference1.eliminarUsuarioResponse> eliminarUsuarioAsync(string us_dni) {
             E_Commerce.ServiceReference1.eliminarUsuarioRequest inValue = new E_Commerce.ServiceReference1.eliminarUsuarioRequest();
             inValue.Body = new E_Commerce.ServiceReference1.eliminarUsuarioRequestBody();
-            inValue.Body.us_correo = us_correo;
+            inValue.Body.us_dni = us_dni;
             return ((E_Commerce.ServiceReference1.WebService1Soap)(this)).eliminarUsuarioAsync(inValue);
         }
         
